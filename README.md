@@ -7,13 +7,13 @@
 |kube-master|192.168.1.181|etcd0|
 |kube-node1|192.168.1.182|etcd1|
 
-#####关闭防火墙
+###### 关闭防火墙
 ```
 systemctl stop firewalld
 systemctl disable firewalld
 ```
 
-#####编辑文件*/etc/sysctl.d/k8s.conf*
+###### 编辑文件*/etc/sysctl.d/k8s.conf*
 
 ```
 net.ipv4.ip_forward = 1
@@ -21,32 +21,32 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 ```
 
-#####载入配置
+###### 载入配置
 ``` 
 sysctl -p /etc/sysctl.d/k8s.conf  
 ```
 
-#####关闭swap分区
+###### 关闭swap分区
 ```
 swapoff -a
 sysctl -w vm.swappiness=0
 ```
 
-#####注释fstab中的swap分区
+###### 注释fstab中的swap分区
 ```
 vim /etc/fstab
 #/dev/mapper/centos-swap swap                    swap    defaults        0 0
 ```
 
-####1. 安装etcd
+#### 1. 安装etcd
 
-#####yum 安装etcd
+###### yum 安装etcd
 ```
 yum install etcd -y
 ```
 
 
-#####编辑配置
+###### 编辑配置
 ```
 vim /etc/etcd/etcd.conf
 ```
@@ -123,7 +123,7 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 #ETCD_AUTH_TOKEN="simple"
 ```
 
-######启动etcd集群
+###### 启动etcd集群
 ```
 @kube-master
 systemctl enable etcd
@@ -133,12 +133,10 @@ systemctl enable etcd
 systmctl start etcd
 ```
 
-######查看etcd节点成员
+###### 查看etcd节点成员
 ```
 etcdctl member list
 ```
-
-
 
 
 
