@@ -3,17 +3,17 @@
 ##### 0. 系统设置
 
 |hostname|ip|service|
-|:------:|:-:|:-----:|
+|:------:|:-:|:----:|
 |kube-master|192.168.1.181|etcd0|
 |kube-node1|192.168.1.182|etcd1|
 
-######关闭防火墙
+#####关闭防火墙
 ```
 systemctl stop firewalld
 systemctl disable firewalld
 ```
 
-######编辑文件*/etc/sysctl.d/k8s.conf*
+#####编辑文件*/etc/sysctl.d/k8s.conf*
 
 ```
 net.ipv4.ip_forward = 1
@@ -21,18 +21,18 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 ```
 
-######载入配置
+#####载入配置
 ``` 
 sysctl -p /etc/sysctl.d/k8s.conf  
 ```
 
-######关闭swap分区
+#####关闭swap分区
 ```
 swapoff -a
 sysctl -w vm.swappiness=0
 ```
 
-######注释fstab中的swap分区
+#####注释fstab中的swap分区
 ```
 vim /etc/fstab
 #/dev/mapper/centos-swap swap                    swap    defaults        0 0
@@ -40,13 +40,13 @@ vim /etc/fstab
 
 ####1. 安装etcd
 
-######yum 安装etcd
+#####yum 安装etcd
 ```
 yum install etcd -y
 ```
 
 
-######编辑配置
+#####编辑配置
 ```
 vim /etc/etcd/etcd.conf
 ```
@@ -137,6 +137,11 @@ systmctl start etcd
 ```
 etcdctl member list
 ```
+
+
+
+
+
 
 
 
